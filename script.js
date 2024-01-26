@@ -12,12 +12,18 @@ const API_ENDPOINT = 'https://yesno.wtf/api';
  *
  */
 async function fetchAnswer() {
-    const response = await fetch(API_ENDPOINT);
-    const jResponse = await response.json();
-    const yesNo = jResponse.answer;
-    const node = document.createTextNode(yesNo);
-    let ans = document.getElementById('answer');
-    ans.appendChild(node);
+    try {
+        const response = await fetch(API_ENDPOINT);
+        const jResponse = await response.json();
+        const yesNo = jResponse.answer;
+        const node = document.createTextNode(yesNo);
+        let ans = document.getElementById('answer');
+        ans.appendChild(node);
+    } catch (error) {
+        const node = document.createTextNode('Oops! No answer');
+        let ans = document.getElementById('answer');
+        ans.appendChild(node);
+    }
 }
 
 function clearAnswer() {
